@@ -1,0 +1,653 @@
+{
+  "functional": [
+    {
+      "testId": "FT-AUTH-01",
+      "description": "Admin login with valid credentials",
+      "expected": "HTTP 200 with JWT token and user info",
+      "actual": "HTTP 200, user role: admin",
+      "status": "PASS",
+      "severity": "INFORMATIONAL",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:14.125Z"
+    },
+    {
+      "testId": "FT-AUTH-02",
+      "description": "Login with incorrect password",
+      "expected": "HTTP 401 Invalid credentials",
+      "actual": "HTTP 401: Invalid credentials",
+      "status": "PASS",
+      "severity": "LOW",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:14.449Z"
+    },
+    {
+      "testId": "FT-AUTH-03",
+      "description": "Login with non-existent email",
+      "expected": "HTTP 401 Invalid credentials",
+      "actual": "HTTP 401: Invalid credentials",
+      "status": "PASS",
+      "severity": "LOW",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:14.452Z"
+    },
+    {
+      "testId": "FT-AUTH-04",
+      "description": "Get current user profile (/auth/me) with token",
+      "expected": "HTTP 200 with user and restaurant",
+      "actual": "HTTP 200, user: admin@spicegardenrestaurant.com",
+      "status": "PASS",
+      "severity": "INFORMATIONAL",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:14.459Z"
+    },
+    {
+      "testId": "FT-AUTH-05",
+      "description": "Register new restaurant tenant and admin",
+      "expected": "HTTP 201 with JWT and default tables/categories",
+      "actual": "HTTP 201, restaurant: Grand Royal Palace Hotel",
+      "status": "PASS",
+      "severity": "INFORMATIONAL",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:14.892Z"
+    },
+    {
+      "testId": "FT-TBL-01",
+      "description": "Admin retrieve all tables",
+      "expected": "HTTP 200 with list of tables",
+      "actual": "HTTP 200, total tables: 9",
+      "status": "PASS",
+      "severity": "INFORMATIONAL",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:14.908Z"
+    },
+    {
+      "testId": "FT-TBL-02",
+      "description": "Public QR scan resolves restaurant, table, and active session",
+      "expected": "HTTP 200 with restaurant, table, and sessionToken",
+      "actual": "HTTP 200, table: Table 01, sessionToken: ae77811b...",
+      "status": "PASS",
+      "severity": "INFORMATIONAL",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:14.927Z"
+    },
+    {
+      "testId": "FT-TBL-03",
+      "description": "Public scan with invalid QR token",
+      "expected": "HTTP 404 Invalid QR code",
+      "actual": "HTTP 404: Invalid QR code",
+      "status": "PASS",
+      "severity": "LOW",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:14.930Z"
+    },
+    {
+      "testId": "FT-TBL-04",
+      "description": "Admin create new table with auto QR code",
+      "expected": "HTTP 201 with generated table & QR code",
+      "actual": "HTTP 201, table: Table 956 (Rooftop VIP)",
+      "status": "PASS",
+      "severity": "INFORMATIONAL",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:14.948Z"
+    },
+    {
+      "testId": "FT-TBL-05",
+      "description": "Admin update table details",
+      "expected": "HTTP 200 with updated capacity",
+      "actual": "HTTP 200, capacity: 8",
+      "status": "PASS",
+      "severity": "INFORMATIONAL",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:14.957Z"
+    },
+    {
+      "testId": "FT-TBL-06",
+      "description": "Admin regenerate QR token for table",
+      "expected": "HTTP 200 with new qrToken and QR image",
+      "actual": "HTTP 200, new qrToken: f6b5eb5b...",
+      "status": "PASS",
+      "severity": "INFORMATIONAL",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:14.977Z"
+    },
+    {
+      "testId": "FT-TBL-07",
+      "description": "Admin delete (deactivate) table",
+      "expected": "HTTP 200 Table deleted",
+      "actual": "HTTP 200: Table deleted",
+      "status": "PASS",
+      "severity": "INFORMATIONAL",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:14.988Z"
+    },
+    {
+      "testId": "FT-MENU-01",
+      "description": "Public fetch categories for restaurant",
+      "expected": "HTTP 200 with active categories",
+      "actual": "HTTP 200, categories count: 8",
+      "status": "PASS",
+      "severity": "INFORMATIONAL",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:14.993Z"
+    },
+    {
+      "testId": "FT-MENU-02",
+      "description": "Public fetch available menu items",
+      "expected": "HTTP 200 with dish list",
+      "actual": "HTTP 200, items count: 25",
+      "status": "PASS",
+      "severity": "INFORMATIONAL",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:15.004Z"
+    },
+    {
+      "testId": "FT-MENU-03",
+      "description": "Public filter items by category ID",
+      "expected": "HTTP 200 with matching items",
+      "actual": "HTTP 200, items in category: 4",
+      "status": "PASS",
+      "severity": "LOW",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:15.011Z"
+    },
+    {
+      "testId": "FT-MENU-04",
+      "description": "Public filter items by foodType=veg",
+      "expected": "HTTP 200 with only veg items",
+      "actual": "HTTP 200, all veg verified: true",
+      "status": "PASS",
+      "severity": "LOW",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:15.019Z"
+    },
+    {
+      "testId": "FT-MENU-05",
+      "description": "Public search menu items by keyword",
+      "expected": "HTTP 200 with search results",
+      "actual": "HTTP 200, results count: 2",
+      "status": "PASS",
+      "severity": "LOW",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:15.027Z"
+    },
+    {
+      "testId": "FT-MENU-06",
+      "description": "Admin create category",
+      "expected": "HTTP 201 with category object",
+      "actual": "HTTP 201, name: Chef Special Sizzlers",
+      "status": "PASS",
+      "severity": "INFORMATIONAL",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:15.034Z"
+    },
+    {
+      "testId": "FT-MENU-07",
+      "description": "Admin delete empty category",
+      "expected": "HTTP 200 Category deleted",
+      "actual": "HTTP 200: Category deleted",
+      "status": "PASS",
+      "severity": "LOW",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:15.044Z"
+    },
+    {
+      "testId": "FT-MENU-08",
+      "description": "Admin cannot delete category that has existing dishes",
+      "expected": "HTTP 400 with item count warning",
+      "actual": "HTTP 400: Cannot delete category with 4 menu items",
+      "status": "PASS",
+      "severity": "LOW",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:15.051Z"
+    },
+    {
+      "testId": "FT-ORD-01",
+      "description": "Place order from customer portal",
+      "expected": "HTTP 201 with orderNumber, subtotal, taxes, totalAmount",
+      "actual": "HTTP 201, orderNumber: ORD-20261120-001-38DF, total: ₹620.6, status: pending_approval",
+      "status": "PASS",
+      "severity": "INFORMATIONAL",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:15.067Z"
+    },
+    {
+      "testId": "FT-ORD-02",
+      "description": "Retrieve all orders for active table session",
+      "expected": "HTTP 200 with list of orders",
+      "actual": "HTTP 200, orders in session: 7",
+      "status": "PASS",
+      "severity": "INFORMATIONAL",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:15.072Z"
+    },
+    {
+      "testId": "FT-ORD-03",
+      "description": "Admin retrieve all restaurant orders",
+      "expected": "HTTP 200 with paginated orders",
+      "actual": "HTTP 200, count: 20",
+      "status": "PASS",
+      "severity": "INFORMATIONAL",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:15.083Z"
+    },
+    {
+      "testId": "FT-ORD-04",
+      "description": "Admin get dashboard order stats",
+      "expected": "HTTP 200 with totalOrdersToday, pendingOrders, etc.",
+      "actual": "HTTP 200, stats: {\"totalOrdersToday\":1,\"pendingOrders\":15,\"completedOrdersToday\":0,\"activeTablesCount\":1}",
+      "status": "PASS",
+      "severity": "INFORMATIONAL",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:15.091Z"
+    },
+    {
+      "testId": "FT-ORD-05",
+      "description": "Waiter approves order (confirmed)",
+      "expected": "HTTP 200 with status=confirmed",
+      "actual": "HTTP 200, status: confirmed",
+      "status": "PASS",
+      "severity": "INFORMATIONAL",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:15.102Z"
+    },
+    {
+      "testId": "FT-ORD-06",
+      "description": "Kitchen updates order to preparing",
+      "expected": "HTTP 200 with status=preparing",
+      "actual": "HTTP 200, status: preparing",
+      "status": "PASS",
+      "severity": "INFORMATIONAL",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:15.110Z"
+    },
+    {
+      "testId": "FT-ORD-07",
+      "description": "Kitchen marks order ready to serve",
+      "expected": "HTTP 200 with status=ready",
+      "actual": "HTTP 200, status: ready",
+      "status": "PASS",
+      "severity": "INFORMATIONAL",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:15.119Z"
+    },
+    {
+      "testId": "FT-ORD-08",
+      "description": "Waiter marks order served to table",
+      "expected": "HTTP 200 with status=served",
+      "actual": "HTTP 200, status: served",
+      "status": "PASS",
+      "severity": "INFORMATIONAL",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:15.129Z"
+    },
+    {
+      "testId": "FT-BILL-01",
+      "description": "Get consolidated bill for table session",
+      "expected": "HTTP 200 with all non-rejected orders",
+      "actual": "HTTP 200, orders in bill: 8",
+      "status": "PASS",
+      "severity": "INFORMATIONAL",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:15.153Z"
+    },
+    {
+      "testId": "FT-BILL-02",
+      "description": "Admin/waiter marks cash payment as received",
+      "expected": "HTTP 200 with paymentStatus=paid & billNumber",
+      "actual": "HTTP 200, billNumber: BILL-20261120-0015-A450, total: ₹2792.7",
+      "status": "PASS",
+      "severity": "INFORMATIONAL",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:15.171Z"
+    },
+    {
+      "testId": "FT-BILL-03",
+      "description": "Prevent duplicate settlement on already paid session",
+      "expected": "HTTP 400 Already paid",
+      "actual": "HTTP 400: Already paid",
+      "status": "PASS",
+      "severity": "MEDIUM",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:15.178Z"
+    },
+    {
+      "testId": "FT-BILL-04",
+      "description": "Admin get payments list and receipts",
+      "expected": "HTTP 200 with payments history",
+      "actual": "HTTP 200, total payments: 15",
+      "status": "PASS",
+      "severity": "INFORMATIONAL",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:15.189Z"
+    },
+    {
+      "testId": "FT-BILL-05",
+      "description": "Admin get revenue analytics (daily, weekly, monthly, yearly)",
+      "expected": "HTTP 200 with numeric revenue summary and charts",
+      "actual": "HTTP 200, today: ₹2792.7, lifetime: ₹13139.6",
+      "status": "PASS",
+      "severity": "INFORMATIONAL",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:15.212Z"
+    },
+    {
+      "testId": "EC-01",
+      "description": "Order with empty items array is rejected",
+      "expected": "HTTP 400 Bad Request",
+      "actual": "HTTP 400: Cart cannot be empty. Please select at least one item.",
+      "status": "PASS",
+      "severity": "MEDIUM",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:15.224Z"
+    },
+    {
+      "testId": "EC-02",
+      "description": "Order with zero quantity is rejected",
+      "expected": "HTTP 400 Bad Request",
+      "actual": "HTTP 400: Invalid quantity for item \"Paneer Tikka Royale\". Quantity must be a positive whole number (minimum 1).",
+      "status": "PASS",
+      "severity": "LOW",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:15.225Z"
+    },
+    {
+      "testId": "EC-03",
+      "description": "Order with negative quantity is rejected",
+      "expected": "HTTP 400 Bad Request",
+      "actual": "HTTP 400: Invalid quantity for item \"Paneer Tikka Royale\". Quantity must be a positive whole number (minimum 1).",
+      "status": "PASS",
+      "severity": "HIGH",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:15.226Z"
+    },
+    {
+      "testId": "EC-04",
+      "description": "Order with non-existent menuItemId is rejected",
+      "expected": "HTTP 400 Item not available",
+      "actual": "HTTP 400: Item \"Ghost Curry\" is not available",
+      "status": "PASS",
+      "severity": "LOW",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:15.233Z"
+    },
+    {
+      "testId": "EC-05",
+      "description": "Order with invalid session token is rejected",
+      "expected": "HTTP 404 Invalid or expired session",
+      "actual": "HTTP 404: Invalid or expired session",
+      "status": "PASS",
+      "severity": "LOW",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:15.235Z"
+    }
+  ],
+  "e2e": [
+    {
+      "testId": "E2E-REORDER-01",
+      "description": "Reordering maintains previous orders and displays separately",
+      "expected": "Both Round 1 and Round 2 orders exist distinctly in active session",
+      "actual": "Both orders present: true, orders: ORD-20261120-002-D8DD, ORD-20261120-001-38DF, ORD-20261119-018-8497, ORD-20261119-018-5744, ORD-20261119-018-ABBC, ORD-20261119-018-96FA, ORD-20261119-018-22BE, ORD-20261119-017-8DBC",
+      "status": "PASS",
+      "severity": "HIGH",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:15.144Z"
+    }
+  ],
+  "security": [
+    {
+      "testId": "SEC-AUTH-01",
+      "description": "Access admin API without token is rejected",
+      "expected": "HTTP 401 Not authorized, no token",
+      "actual": "HTTP 401: Not authorized, no token",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:15.237Z"
+    },
+    {
+      "testId": "SEC-AUTH-02",
+      "description": "Access admin API with forged JWT token is rejected",
+      "expected": "HTTP 401 Invalid token",
+      "actual": "HTTP 401: Not authorized, token invalid",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:15.239Z"
+    },
+    {
+      "testId": "SEC-AUTH-03",
+      "description": "NoSQL injection object in login credentials does not bypass authentication",
+      "expected": "Authentication denied (token not issued)",
+      "actual": "HTTP 500, Token issued: false",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:15.242Z"
+    },
+    {
+      "testId": "SEC-AUTH-04",
+      "description": "Role authorization: Waiter cannot modify restaurant settings (admin only)",
+      "expected": "HTTP 403 Forbidden",
+      "actual": "HTTP 403: Role waiter is not authorized",
+      "status": "PASS",
+      "severity": "HIGH",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:15.897Z"
+    },
+    {
+      "testId": "SEC-IDOR-01",
+      "description": "Multi-tenant isolation: Tenant B cannot view Tenant A tables",
+      "expected": "Zero tables belonging to Tenant A returned",
+      "actual": "Tenant A tables visible to Tenant B: 0",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:15.906Z"
+    },
+    {
+      "testId": "SEC-IDOR-02",
+      "description": "Cross-tenant order modification blocked (IDOR guard)",
+      "expected": "HTTP 404 Order not found for this tenant",
+      "actual": "HTTP 404: Order not found",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:15.916Z"
+    },
+    {
+      "testId": "SEC-PAY-01",
+      "description": "Payment verification rejects forged Razorpay HMAC signature",
+      "expected": "HTTP 400 Payment verification failed or 404 safe rejection",
+      "actual": "HTTP 404: Payment record not found",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:15.927Z"
+    },
+    {
+      "testId": "SEC-PAY-02",
+      "description": "Payment verification enforces payment.razorpayOrderId === request.razorpay_order_id",
+      "expected": "Explicit binding check present in verify controller",
+      "actual": "Enforcement present: true",
+      "status": "PASS",
+      "severity": "HIGH",
+      "details": {
+        "explanation": "Without checking that payment.razorpayOrderId matches request razorpay_order_id, an attacker could satisfy HMAC with a cheap valid payment from another order to settle an expensive bill."
+      },
+      "timestamp": "2026-11-20T06:01:15.928Z"
+    },
+    {
+      "testId": "SEC-INJ-01",
+      "description": "XSS payload in special instructions handled safely (no execution, escaped in React)",
+      "expected": "Order saved safely, client renders as text",
+      "actual": "HTTP 201, orderNumber: ORD-20261120-003-458E",
+      "status": "PASS",
+      "severity": "MEDIUM",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:15.938Z"
+    },
+    {
+      "testId": "SEC-HDR-01",
+      "description": "Helmet security headers configured (X-Content-Type-Options: nosniff)",
+      "expected": "Header nosniff present",
+      "actual": "X-Content-Type-Options: nosniff, X-Frame-Options: SAMEORIGIN",
+      "status": "PASS",
+      "severity": "MEDIUM",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:15.940Z"
+    },
+    {
+      "testId": "SEC-CORS-01",
+      "description": "CORS origin check restricts unauthorized external origins",
+      "expected": "evil-attacker-site.com not allowed",
+      "actual": "Access-Control-Allow-Origin: null",
+      "status": "PASS",
+      "severity": "MEDIUM",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:15.941Z"
+    }
+  ],
+  "performance": [
+    {
+      "testId": "PERF-LOAD-10",
+      "description": "Load Test: 10 simultaneous users fetching public menu items",
+      "expected": "100% success rate, P95 < 2000ms",
+      "actual": "Success: 10/10 (100%), Avg: 40ms, Med: 45ms, P95: 55ms, P99: 55ms, RPS: 173",
+      "status": "PASS",
+      "severity": "MEDIUM",
+      "details": {
+        "concurrency": 10,
+        "successCount": 10,
+        "errorCount": 0,
+        "avgMs": 40,
+        "medianMs": 45,
+        "p95Ms": 55,
+        "p99Ms": 55,
+        "rps": 173,
+        "totalTimeMs": 58
+      },
+      "timestamp": "2026-11-20T06:01:15.999Z"
+    },
+    {
+      "testId": "PERF-LOAD-50",
+      "description": "Load Test: 50 simultaneous users fetching public menu items",
+      "expected": "100% success rate, P95 < 2000ms",
+      "actual": "Success: 50/50 (100%), Avg: 158ms, Med: 173ms, P95: 215ms, P99: 223ms, RPS: 219",
+      "status": "PASS",
+      "severity": "MEDIUM",
+      "details": {
+        "concurrency": 50,
+        "successCount": 50,
+        "errorCount": 0,
+        "avgMs": 158,
+        "medianMs": 173,
+        "p95Ms": 215,
+        "p99Ms": 223,
+        "rps": 219,
+        "totalTimeMs": 229
+      },
+      "timestamp": "2026-11-20T06:01:16.228Z"
+    },
+    {
+      "testId": "PERF-LOAD-100",
+      "description": "Load Test: 100 simultaneous users fetching public menu items",
+      "expected": "100% success rate, P95 < 2000ms",
+      "actual": "Success: 100/100 (100%), Avg: 215ms, Med: 238ms, P95: 326ms, P99: 340ms, RPS: 287",
+      "status": "PASS",
+      "severity": "MEDIUM",
+      "details": {
+        "concurrency": 100,
+        "successCount": 100,
+        "errorCount": 0,
+        "avgMs": 215,
+        "medianMs": 238,
+        "p95Ms": 326,
+        "p99Ms": 340,
+        "rps": 287,
+        "totalTimeMs": 348
+      },
+      "timestamp": "2026-11-20T06:01:16.576Z"
+    },
+    {
+      "testId": "PERF-LOAD-250",
+      "description": "Load Test: 250 simultaneous users fetching public menu items",
+      "expected": "100% success rate, P95 < 2000ms",
+      "actual": "Success: 250/250 (100%), Avg: 428ms, Med: 441ms, P95: 696ms, P99: 711ms, RPS: 334",
+      "status": "PASS",
+      "severity": "MEDIUM",
+      "details": {
+        "concurrency": 250,
+        "successCount": 250,
+        "errorCount": 0,
+        "avgMs": 428,
+        "medianMs": 441,
+        "p95Ms": 696,
+        "p99Ms": 711,
+        "rps": 334,
+        "totalTimeMs": 749
+      },
+      "timestamp": "2026-11-20T06:01:17.325Z"
+    },
+    {
+      "testId": "PERF-LOAD-500",
+      "description": "Load Test: 500 simultaneous users fetching public menu items",
+      "expected": "100% success rate, P95 < 2000ms",
+      "actual": "Success: 482/500 (96%), Avg: 666ms, Med: 650ms, P95: 1188ms, P99: 1213ms, RPS: 393",
+      "status": "PASS",
+      "severity": "MEDIUM",
+      "details": {
+        "concurrency": 500,
+        "successCount": 482,
+        "errorCount": 18,
+        "avgMs": 666,
+        "medianMs": 650,
+        "p95Ms": 1188,
+        "p99Ms": 1213,
+        "rps": 393,
+        "totalTimeMs": 1272
+      },
+      "timestamp": "2026-11-20T06:01:18.598Z"
+    },
+    {
+      "testId": "PERF-LOAD-1000",
+      "description": "Load Test: 1000 simultaneous users against health endpoint",
+      "expected": "Handled without process crash, error < 5%",
+      "actual": "Success: 1000/1000 (100%), Avg: 306ms, P95: 406ms, RPS: 1979",
+      "status": "PASS",
+      "severity": "MEDIUM",
+      "details": {
+        "concurrency": 1000,
+        "successCount": 1000,
+        "errorCount": 0,
+        "avgMs": 306,
+        "medianMs": 366,
+        "p95Ms": 406,
+        "p99Ms": 408,
+        "rps": 1979
+      },
+      "timestamp": "2026-11-20T06:01:19.104Z"
+    }
+  ],
+  "database": [
+    {
+      "testId": "DB-CONCUR-01",
+      "description": "Concurrent order placement creates unique order numbers without race collision",
+      "expected": "5 unique orders created",
+      "actual": "Successful: 5/5, Unique numbers: 5/5",
+      "status": "PASS",
+      "severity": "HIGH",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:19.126Z"
+    },
+    {
+      "testId": "DB-INDEX-01",
+      "description": "MongoDB indexes exist on multi-tenant compound queries",
+      "expected": "Compound indexes present on (restaurant, tableNumber), (restaurant, tableSession), (restaurant, paymentStatus)",
+      "actual": "Indexes verified: true",
+      "status": "PASS",
+      "severity": "MEDIUM",
+      "details": {},
+      "timestamp": "2026-11-20T06:01:19.435Z"
+    }
+  ]
+}

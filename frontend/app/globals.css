@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #3B2118;
+  --secondary: #C65D3A;
+  --accent: #F4B942;
+  --cream: #FFF8EE;
+  --text: #29221F;
+  --success: #248A52;
+  --danger: #D94A45;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  color: var(--text);
+  background-color: var(--cream);
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-secondary text-white px-5 py-2.5 rounded-xl font-semibold hover:bg-opacity-95 transition-all duration-200 shadow-md hover:shadow-lg active:scale-95 disabled:opacity-50 disabled:pointer-events-none;
+  }
+  .btn-accent {
+    @apply bg-accent text-primary px-5 py-2.5 rounded-xl font-bold hover:bg-opacity-95 transition-all duration-200 shadow-md active:scale-95 disabled:opacity-50;
+  }
+  .btn-outline {
+    @apply border-2 border-primary/20 text-primary font-semibold px-4 py-2 rounded-xl hover:bg-primary/5 transition-all;
+  }
+  .card {
+    @apply bg-white rounded-2xl shadow-sm border border-orange-950/5 transition-all;
+  }
+  .input-field {
+    @apply w-full px-4 py-3 rounded-xl border border-gray-200 bg-white text-textPrimary placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all;
+  }
+}
